@@ -50,7 +50,7 @@ int main()
 
 	// implicit conversion sounds like what I need for the template collision overload func call issue, u know, though I might be wrong
 
-	UI_Text text = UI_Text(Vector2f(600,600), "Knowledge!", 100);
+	UI_Text text = UI_Text(Vector2f(600,600), "Knowledge!", 100); // hi
 	Renderer.AddDrawable(text);
 
 	app.AddAwakeFunctions(MakePlayer);
