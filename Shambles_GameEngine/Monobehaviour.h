@@ -56,14 +56,15 @@ namespace Shambles
 			DeltaTime = _time.asSeconds();
 		}
 
-		float GetDeltaTimeMili()
+		Int32 GetDeltaTimeMili()
 		{
 			return _time.asMilliseconds();
 		}
 
 	private:
+		Monobehaviour() {};
+		static Monobehaviour* _monobehaviour;
 		static void DelayedCall(function<void()> function, float callDelay);
 
-		Monobehaviour() {};
 	};
 }

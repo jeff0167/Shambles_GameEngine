@@ -15,7 +15,6 @@ namespace Shambles
         Vector2f offsetPos = Vector2f(0, 0);
         Shape* shape;
         Rigidbody* rigidbody;
-        float rotation;
 
         Collider() {};
 

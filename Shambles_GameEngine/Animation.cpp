@@ -3,7 +3,7 @@
 
 namespace Shambles
 {
-	Animation::Animation(Texture* texture, Vector2u _imageCount, float _switchFrameTime) :
+	Animation::Animation(const Texture* texture, Vector2u _imageCount, float _switchFrameTime) :
 		imageCount(_imageCount), switchFrameTime(_switchFrameTime)
 	{
 		currentImage.x = 0;

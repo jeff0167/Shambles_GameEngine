@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Pch.h"
+#include "BoxCollider.h"
 //#include "BoxCollider.h"
 
 #ifdef GE_DEBUG
@@ -89,11 +90,14 @@ namespace Shambles
 			Log(string_view("Milliseconds: " + to_string(line.asMilliseconds())));
 		}
 
-		//inline void Log(BoxCollider& line)
-		//{
-		//	Log(string_view(line.ToString()));
-		//}
-
+		inline void Log(BoxCollider& line)
+		{
+			Log(string_view(line.ToString()));
+		}
+		inline void Log(GameObject& line)
+		{
+			Log(string_view(line.ToString()));
+		}
 
 		inline void Log(string_view line)
 		{
@@ -116,7 +120,7 @@ namespace Shambles
 				TextLog t;
 				t.text = line;
 				t.index = 1;
-				ConsoleLogs.push_back(t);
+				ConsoleLogs.emplace_back(t);
 			}
 
 			WriteAllLines();

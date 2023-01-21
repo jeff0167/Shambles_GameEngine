@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Canvas.h"
+#include "Component.h"
 #include "Pch.h"
 
 using namespace sf;
@@ -8,7 +8,7 @@ using namespace std;
 
 namespace Shambles
 {
-	class SpriteRenderer : public RectangleShape
+	class SpriteRenderer : public RectangleShape, public Component
 	{
 	public:
 		SpriteRenderer();

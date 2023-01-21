@@ -6,10 +6,20 @@ using namespace std;
 
 namespace Shambles
 {
+	Canvas* Canvas::_canvas = nullptr;
+
 	Canvas& Canvas::GetInstance()
 	{
-		static Canvas instance; // new way, and we never again need to do the if checking every time, and much cleaner
-		return instance;
+		if (_canvas == nullptr)
+		{
+			_canvas = new Canvas();
+			_canvas->drawablesLayers.reserve(10);
+			for (size_t i = 0; i < 10; i++)
+			{
+				_canvas->drawablesLayers[i].reserve(100);
+			}
+		}
+		return *_canvas;
 	}
 
 	void Canvas::AddWindow(RenderTarget& renderTarget)
@@ -21,12 +31,12 @@ namespace Shambles
 	{
 		RemoveDrawable(_drawable);
 
-		drawablesLayers[layerNr].push_back(&_drawable);
+		drawablesLayers[layerNr].emplace_back(&_drawable);
 	}
 
 	void Canvas::AddDrawable(Drawable& drawable, int layerNr)
 	{
-		drawablesLayers[layerNr].push_back(&drawable);
+		drawablesLayers[layerNr].emplace_back(&drawable);
 	}
 
 	void Canvas::RemoveDrawable(Drawable& _drawable)

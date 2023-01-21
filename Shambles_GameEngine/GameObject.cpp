@@ -66,33 +66,33 @@ namespace Shambles
 		Renderer.AddDrawable(drawShape);
 	}
 
-	void GameObject::AddComponent(Component& _component)
+	void GameObject::AddComponent(Component& _component) ///TODO remember to add UI elements and spriteRenderer
 	{
 		//DebugLog(typeid(_component).name());
 		string classType = typeid(_component).name();
 
-		if (classType == "class Shambles::Rigidbody")
+		if (classType == "class Shambles::Rigidbody") // use switch? or divide it into function calls
 		{
 			dynamic_cast<Rigidbody&>(_component).transform = transform; // Must manually cast by each class type, super anoying
 
 			auto cc = GetComponent(Collider());
 			if (cc != nullptr) cc->rigidbody = &dynamic_cast<Rigidbody&>(_component);
 
-			Science->AddRigidbody(dynamic_cast<Rigidbody&>(_component));
+			Science.AddRigidbody(dynamic_cast<Rigidbody&>(_component));
 		}
 		else if (classType == "class Shambles::CircleCollider" || classType == "class Shambles::BoxCollider") // check if it contains collider in string
 		{
 			dynamic_cast<Collider&>(_component).rigidbody = GetComponent(Rigidbody());
 
-			Science->AddCollider(dynamic_cast<Collider&>(_component));
+			Science.AddCollider(dynamic_cast<Collider&>(_component));
 		}
 		else if (classType == "class Shambles::ParticleSystem")
 		{
 			auto particleSystem = &dynamic_cast<ParticleSystemUpdate&>(_component);
 			particleSystem->SetEmitterTransform(*transform);
-			Science->AddParticleSystem(*particleSystem);
+			Science.AddParticleSystem(*particleSystem);
 		}
-		components.push_back(&_component);
+		components.emplace_back(&_component);
 		_component.gameObject = this;
 	}
 
@@ -104,17 +104,17 @@ namespace Shambles
 		{
 			return &(dynamic_cast<Rigidbody&>(_component));
 		}
-		else if (classType == "class CircleCollider" || classType == "class BoxCollider")
+		else if (classType == "class Shambles::CircleCollider" || classType == "class Shambles::BoxCollider")
 		{
 			return &(dynamic_cast<Collider&>(_component));
 		}
 		return nullptr;
 	}
 
-	void GameObject::RemoveComponent(Component& _component) // sure it's no longer in it's list but the component still exist in memory and has shares the same info with gameObject as before
+	void GameObject::RemoveComponent(Component& _component) /// TODO this needs to work, just like add it needs to do things based on the component and remove all references and be DELETED
 	{
 		string removeComponentType = typeid(_component).name();
-		for (size_t i = 0; i < components.size(); i++) // it needs to use templates as well to remove components by type and certainly not purely by the memory adress
+		for (size_t i = 0; i < components.size(); i++) 
 		{
 			string currentComponentType = typeid(*components[i]).name();
 			DebugLog("to remove: " + removeComponentType + " current: " + currentComponentType);
@@ -125,6 +125,28 @@ namespace Shambles
 		}
 	}
 
+	template<class T>
+	inline T* GameObject::GetComponent(T type)
+	{
+		for (auto component : components)
+		{
+			if (typeid(*component).name() == typeid(type).name()) // *this->components[i]).name(), remember the * in front!!
+			{
+				return &dynamic_cast<T&>(*component);
+			}
+		}
+
+		string typeName = typeid(type).name();
+		if (!typeName.find("Collider")) return nullptr;
+
+		for (auto component : components) // is this even necessarcy!? ok say you just want a collider, not a specifik one, then you would do this, yes
+		{
+			string s = typeid(*component).name();
+			if (s.find("Collider") != string::npos)	return &dynamic_cast<T&>(*component);
+		}
+		return nullptr;
+	}
+
 	const vector<Component*>& GameObject::GetComponents()
 	{
 		return components;
@@ -132,7 +154,11 @@ namespace Shambles
 
 	GameObject::~GameObject()
 	{
-		//DebugLog(typeid(this).name());
+		for (auto component : components)
+		{
+			RemoveComponent(*component);
+		}
+		//DebugLog(typeid(*this).name());
 		// gameObject should delete all it's related components and references
 	}
 }

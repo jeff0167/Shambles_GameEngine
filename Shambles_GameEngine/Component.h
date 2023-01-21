@@ -12,6 +12,7 @@ namespace Shambles
 	{
 	public:
 		GameObject* gameObject;
+		bool IsActive;
 
 		Component() {};
 		virtual void AbstractNullFunc()

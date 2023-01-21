@@ -11,7 +11,7 @@ namespace Shambles
 		IntRect uvRect;
 
 		Animation() {};
-		Animation(Texture* texture, Vector2u _imageCount, float _switchFrameTime);
+		Animation(const Texture* texture, Vector2u _imageCount, float _switchFrameTime);
 
 		void Update(int row, float deltaTime);
 		void Update(int row, int rowStartFrame, int fowEndFrame, float deltaTime);

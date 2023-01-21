@@ -19,10 +19,10 @@ namespace Shambles
 	//	return _Scene;
 	//}
 
-	Scene* Scene::GetInstance()
+	Scene& Scene::GetInstance()
 	{
 		static Scene instance; // new way, and we never again need to do the if checking every time, and much cleaner
-		return &instance;
+		return instance;
 	}
 
 	vector<string> split(string s, string delimiter)

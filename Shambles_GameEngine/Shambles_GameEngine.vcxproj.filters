@@ -9,30 +9,20 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="PrecompiledHeader">
       <UniqueIdentifier>{9a21c72a-212e-4294-a2d3-24ad4ebfada3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleSystem">
-      <UniqueIdentifier>{4bc5d172-7e39-4fc0-b565-9b1af0ece4c0}</UniqueIdentifier>
+    <Filter Include="Header Files\GameObject Files">
+      <UniqueIdentifier>{9617336e-0553-4c6c-b38d-879dd894207b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleSystem\Header Files">
-      <UniqueIdentifier>{82910019-1755-46a1-a5f6-81bccc46ea8c}</UniqueIdentifier>
+    <Filter Include="Source Files\GameObject Files">
+      <UniqueIdentifier>{41bd8332-20df-4a33-a356-fe74c991f193}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleSystem\Resource Files">
-      <UniqueIdentifier>{5bc98ecc-d64a-4463-85c7-f40fc94fc6f0}</UniqueIdentifier>
+    <Filter Include="Header Files\ParticleSystem">
+      <UniqueIdentifier>{4b507c8b-e64d-4682-997e-2556ac221f5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject Files">
-      <UniqueIdentifier>{9d69dbc4-7a9a-4f1f-b352-d4192cbcdf2a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject Files\Header Files">
-      <UniqueIdentifier>{e5fec6e1-597c-4350-86ad-dce7ff80e460}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject Files\Resource Files">
-      <UniqueIdentifier>{27cf9537-0d76-4754-882c-a1475e21713b}</UniqueIdentifier>
+    <Filter Include="Source Files\ParticleSystem">
+      <UniqueIdentifier>{940fe204-c55b-4933-b8e7-e32e60aabce1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,47 +59,47 @@
     <ClInclude Include="MousePoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Particle.h">
-      <Filter>ParticleSystem\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleSystem.h">
-      <Filter>ParticleSystem\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleSystemUpdate.h">
-      <Filter>ParticleSystem\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>GameObject Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleCollider.h">
-      <Filter>GameObject Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>GameObject Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>GameObject Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameObject Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Rigidbody.h">
-      <Filter>GameObject Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>GameObject Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Button.h">
-      <Filter>GameObject Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Text.h">
-      <Filter>GameObject Files\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shambles.h">
       <Filter>PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Header Files\GameObject Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Header Files\GameObject Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\GameObject Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\GameObject Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObject Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Header Files\GameObject Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Header Files\GameObject Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Button.h">
+      <Filter>Header Files\GameObject Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Text.h">
+      <Filter>Header Files\GameObject Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Header Files\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Header Files\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystemUpdate.h">
+      <Filter>Header Files\ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,44 +136,44 @@
     <ClCompile Include="MousePoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleSystemUpdate.cpp">
-      <Filter>ParticleSystem\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>ParticleSystem\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleSystem.cpp">
-      <Filter>ParticleSystem\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Text.cpp">
-      <Filter>GameObject Files\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Button.cpp">
-      <Filter>GameObject Files\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>GameObject Files\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Rigidbody.cpp">
-      <Filter>GameObject Files\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject Files\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>GameObject Files\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>GameObject Files\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleCollider.cpp">
-      <Filter>GameObject Files\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Boxcollider.cpp">
-      <Filter>GameObject Files\Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Boxcollider.cpp">
+      <Filter>Source Files\GameObject Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Source Files\GameObject Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\GameObject Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\GameObject Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObject Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Source Files\GameObject Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Source Files\GameObject Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Button.cpp">
+      <Filter>Source Files\GameObject Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Text.cpp">
+      <Filter>Source Files\GameObject Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Source Files\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Source Files\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystemUpdate.cpp">
+      <Filter>Source Files\ParticleSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

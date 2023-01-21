@@ -18,7 +18,7 @@ namespace Shambles
 
 		void operator=(const Physics&) = delete;
 
-		static Physics* GetInstance();
+		static Physics& GetInstance();
 
 		void InitializePhysicsUpdate();
 
@@ -40,7 +40,7 @@ namespace Shambles
 		const double m_DeltaSpeed = 10.0;
 		float m_PhysicsDeltaTime;
 
-		float GetDeltaTimeMili()
+		Int32 GetDeltaTimeMili()
 		{
 			return m_Time.asMilliseconds();
 		}

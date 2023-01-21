@@ -40,7 +40,7 @@ namespace Shambles
 		__declspec(dllexport) int Start()
 		{
 			Renderer.AddWindow(window);
-			Science->InitializePhysicsUpdate();
+			Science.InitializePhysicsUpdate();
 			Awake();
 
 			window.setFramerateLimit(120); // this should also be changeable

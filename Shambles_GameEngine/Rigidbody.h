@@ -14,6 +14,7 @@ namespace Shambles
 		Vector2f rotationalVelocity;
 		Transformable* transform;
 		bool useGravity;
+		bool isStatic;
 
 		Rigidbody() {}
 		double Magnitude();

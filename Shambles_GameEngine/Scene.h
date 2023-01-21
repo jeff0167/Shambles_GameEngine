@@ -16,7 +16,7 @@ namespace Shambles
         Scene(Scene& other) = delete;
         void operator=(const Scene&) = delete;
 
-        static Scene* GetInstance();
+        static Scene& GetInstance();
 
         void LoadScene();
         void LoadScene(string scenePath);

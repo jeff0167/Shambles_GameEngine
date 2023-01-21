@@ -6,10 +6,15 @@ using namespace std;
 
 namespace Shambles
 {
+	Monobehaviour* Monobehaviour::_monobehaviour = nullptr;
+
 	Monobehaviour& Monobehaviour::GetInstance()
 	{
-		static Monobehaviour instance; // new way, and we never again need to do the if checking every time, and much cleaner
-		return instance;
+		if (_monobehaviour == nullptr)
+		{
+			_monobehaviour = new Monobehaviour();
+		}
+		return *_monobehaviour;
 	}
 	//
 	//GameObject Monobehaviour::Instantiate(GameObject gameObject)

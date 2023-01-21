@@ -18,12 +18,20 @@ namespace Shambles
 	bool BoxXBox(BoxCollider& first, BoxCollider& second);
 	bool CircleXCircle(CircleCollider& first, CircleCollider& second);
 	bool CircleXBox(CircleCollider& first, BoxCollider& second);
-	Physics* m_Physics = Science; // caching it's reference to itself for the static functions to use, real pretty
+	Physics& m_Physics = Science; // caching it's reference to itself for the static functions to use, real pretty
 
-	Physics* Physics::GetInstance()
+	Physics* Physics::_physics = nullptr;
+
+	Physics& Physics::GetInstance()
 	{
-		static Physics instance; // new way, and we never again need to do the if checking every time, and much cleaner
-		return &instance;
+		if (_physics == nullptr)
+		{
+			_physics = new Physics();
+			_physics->rigidbodies.reserve(100);
+			_physics->colliders.reserve(100);
+			_physics->particleSystems.reserve(10);
+		}
+		return *_physics;
 	}
 
 	void Physics::InitializePhysicsUpdate()
@@ -34,7 +42,6 @@ namespace Shambles
 
 	void Physics::PhysicsUpdate()
 	{
-		// oh boy, a long type, saved as cache for reuse though
 		chrono::time_point<chrono::system_clock, chrono::duration<double, chrono::system_clock::period>> step;
 
 		while (true)
@@ -45,19 +52,18 @@ namespace Shambles
 			ParticleUpdate();
 			PhysicsMovementUpdate();
 			PhysicsCollisionUpdate();
-			// it's not close to 20 ms, sometimes it's even well above 30 ms
 			this_thread::sleep_until(step);
 		}
 	}
 
 	void Physics::AddParticleSystem(ParticleSystemUpdate& _particleSystem)
 	{
-		particleSystems.push_back(&_particleSystem);
+		particleSystems.emplace_back(&_particleSystem);
 	}
 
 	void Physics::AddRigidbody(Rigidbody& _rigidbody)
 	{
-		rigidbodies.push_back(&_rigidbody);
+		rigidbodies.emplace_back(&_rigidbody);
 	}
 
 	void Physics::RemoveRigidbody(Rigidbody& _rigidbody)
@@ -91,7 +97,7 @@ namespace Shambles
 
 	void Physics::AddCollider(Collider& _collider)
 	{
-		colliders.push_back(&_collider);
+		colliders.emplace_back(&_collider);
 	}
 
 	void Physics::RemoveCollider(Collider& _collider)
@@ -207,9 +213,9 @@ namespace Shambles
 			if (xi > xj)
 			{
 				// this might need some updates values, or other values, seems to work alright atm
-				second.rigidbody->transform->move(first.rigidbody->velocity * m_Physics->FixedUpdateMovement());
+				second.rigidbody->transform->move(first.rigidbody->velocity * m_Physics.FixedUpdateMovement());
 			}
-			else first.rigidbody->transform->move(second.rigidbody->velocity * m_Physics->FixedUpdateMovement());
+			else first.rigidbody->transform->move(second.rigidbody->velocity * m_Physics.FixedUpdateMovement());
 			//DebugLog("bound intersect");
 			return true;
 		}
@@ -229,9 +235,9 @@ namespace Shambles
 			//if (xi == 0 || xj == 0) return true;
 			if (xi > xj)
 			{
-				second.rigidbody->transform->move(first.rigidbody->velocity * m_Physics->FixedUpdateMovement());
+				second.rigidbody->transform->move(first.rigidbody->velocity * m_Physics.FixedUpdateMovement());
 			}
-			else first.rigidbody->transform->move(second.rigidbody->velocity * m_Physics->FixedUpdateMovement());
+			else first.rigidbody->transform->move(second.rigidbody->velocity * m_Physics.FixedUpdateMovement());
 			//DebugLog("Circle collision");
 			return true;
 		}
@@ -249,9 +255,9 @@ namespace Shambles
 
 			if (xi > xj)
 			{
-				second.rigidbody->transform->move(first.rigidbody->velocity * m_Physics->FixedUpdateMovement());
+				second.rigidbody->transform->move(first.rigidbody->velocity * m_Physics.FixedUpdateMovement());
 			}
-			else first.rigidbody->transform->move(second.rigidbody->velocity * m_Physics->FixedUpdateMovement());
+			else first.rigidbody->transform->move(second.rigidbody->velocity * m_Physics.FixedUpdateMovement());
 			//DebugLog("bound intersect");
 			return true;
 		}

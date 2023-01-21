@@ -9,13 +9,6 @@ namespace Shambles
 		return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
 	}
 
-	Particle::Particle(float radius, Texture& texture) // this is never called
-	{
-		//dot.setRadius(radius);
-		//dot.setTexture(&texture);
-		//lifespan = maxLifespan;
-	}
-
 	Particle::~Particle()
 	{
 	}
@@ -27,8 +20,12 @@ namespace Shambles
 			lifespan = Time::Zero;
 		}
 
-		float alpha = (lifespan.asSeconds() / (maxLifespan.asSeconds())) * 255;
+		int alpha = (lifespan.asSeconds() / (maxLifespan.asSeconds())) * 255;
 		dot.setFillColor(SetColor(Umapi(alpha, 255, 0, 360, 0), 1, 1, alpha));
+		 
+		//Color c = dot.getFillColor(); // this is slow, like a lot
+		//c.a = alpha;
+		//dot.setFillColor(c); // can't simply set the alpha value
 		if (lifespan.asSeconds() == 0)
 		{
 			lifespan = maxLifespan;
@@ -38,11 +35,11 @@ namespace Shambles
 			startPos = GetTargetPos();
 		}
 		velocity += acceleration;
-		position += velocity * Science->FixedUpdateMovement();
+		position += velocity * Science.FixedUpdateMovement();
 		dot.setPosition(position + startPos);
 
 		acceleration = acceleration * 0.f;
-		lifespan = milliseconds(lifespan.asMilliseconds() - Science->GetDeltaTimeMili());
+		lifespan = milliseconds(lifespan.asMilliseconds() - Science.GetDeltaTimeMili());
 	}
 
 	void Particle::SetPosition(float x, float y)
@@ -103,7 +100,7 @@ namespace Shambles
 		}
 	}
 
-	Color Particle::SetColor(int hue, float sat, float colorMulti, float alpha)
+	Color Particle::SetColor(int hue, float sat, float colorMulti, int alpha)
 	{
 		hue %= 360;
 		while (hue < 0) hue += 360;
@@ -116,20 +113,21 @@ namespace Shambles
 
 		int h = hue / 60;
 		float f = float(hue) / 60 - h;
-		float p = colorMulti * (1.f - sat);
-		float q = colorMulti * (1.f - sat * f);
-		float t = colorMulti * (1.f - sat * (1 - f));
-
+		Uint8 p = (colorMulti * (1.f - sat)) * 255;
+		Uint8 q = (colorMulti * (1.f - sat * f)) * 255;
+		Uint8 t = (colorMulti * (1.f - sat * (1 - f))) * 255;
+		Uint8 colorMultiX255 = colorMulti * 255;
+	
 		switch (h)
 		{
 		default:
 		case 0:
-		case 6: return sf::Color(colorMulti * 255, t * 255, p * 255, alpha);
-		case 1: return sf::Color(q * 255, colorMulti * 255, p * 255, alpha);
-		case 2: return sf::Color(p * 255, colorMulti * 255, t * 255, alpha);
-		case 3: return sf::Color(p * 255, q * 255, colorMulti * 255, alpha);
-		case 4: return sf::Color(t * 255, p * 255, colorMulti * 255, alpha);
-		case 5: return sf::Color(colorMulti * 255, p * 255, q * 255, alpha);
+		case 6: return sf::Color(colorMultiX255, t, p, alpha);
+		case 1: return sf::Color(q, colorMultiX255, p, alpha);
+		case 2: return sf::Color(p, colorMultiX255, t, alpha);
+		case 3: return sf::Color(p, q, colorMultiX255, alpha);
+		case 4: return sf::Color(t, p, colorMultiX255, alpha);
+		case 5: return sf::Color(colorMultiX255, p, q, alpha);
 		}
 	}
 }

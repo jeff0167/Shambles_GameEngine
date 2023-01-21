@@ -39,7 +39,7 @@ namespace Shambles
 	{
 		//m_GameObjects.push_back(&gameObject);
 		// save to scene to serialize or could just send the scenewindows gameObjects
-		MyScene->AddGameObject(gameObject);
+		MyScene.AddGameObject(gameObject);
 	}
 
 	void SceneWindow::RemoveGameObject(GameObject& gameObject)
@@ -112,7 +112,7 @@ namespace Shambles
 		{
 			if (text.getGlobalBounds().intersects(MousePos.getGlobalBounds()))
 			{
-				MyScene->SaveScene();
+				MyScene.SaveScene();
 				//DebugLog("Clicked on menu"); // now do what the text tells you!
 			}
 			m_DisplayMenu = false;

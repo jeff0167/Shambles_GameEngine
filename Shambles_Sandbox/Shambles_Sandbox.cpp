@@ -1,4 +1,4 @@
-  #include "../Shambles_GameEngine/Shambles.h" // all necessary files are within shambles.h
+#include "../Shambles_GameEngine/Shambles.h" // all necessary files are within shambles.h
 
 // everything main includes, needs to be included here, 
 // could you perhaps make a bundle header that holds all needed files at once to then only having to use one include
@@ -30,6 +30,8 @@ unique_ptr<Rigidbody> rb;
 Animation _playerAnim;
 Texture hero;
 
+UI_Text someText;
+
 bool idle = true;
 
 //View camera; // usable if you need to move, scale and rotate the view, like any camera in Unity
@@ -50,14 +52,14 @@ int main()
 
 	// implicit conversion sounds like what I need for the template collision overload func call issue, u know, though I might be wrong
 
-	UI_Text text = UI_Text(Vector2f(600,600), "Knowledge!", 100); // hi
-	Renderer.AddDrawable(text);
+	someText = UI_Text(Vector2f(600, 600), "Knowledge!", 100);
+	Renderer.AddDrawable(someText);
 
 	app.AddAwakeFunctions(MakePlayer);
 	app.AddUpdateFunctions(PlayerAnimState);
-	app.AddUpdateFunctions(KeyboardInput); 
-	app.AddUpdateFunctions(MouseInput); 
-	app.AddUpdateFunctions(CollisionChecking);  
+	app.AddUpdateFunctions(KeyboardInput);
+	app.AddUpdateFunctions(MouseInput);
+	app.AddUpdateFunctions(CollisionChecking);
 	app.Start();
 	DebugLog("Hello Universe!");
 	return 0;
@@ -65,10 +67,8 @@ int main()
 
 void MakePlayer()
 {
-	particle.loadFromFile("ParticleDefault.png");
-	hero.loadFromFile("_sprites_heroes.png");
 	player = SpriteRenderer("_sprites_heroes.png", Vector2f(100, 200), Vector2f(600, 600));
-	_playerAnim = Animation(&hero, Vector2u(9, 8), 0.15f);
+	_playerAnim = Animation(player.getTexture(), Vector2u(9, 8), 0.15f);
 
 	Vector2u textureSize = player.getTexture()->getSize(); // 9 * 8
 	textureSize.x /= 9;
@@ -78,7 +78,7 @@ void MakePlayer()
 	player.setTextureRect(IntRect(textureSize.x * 1, textureSize.y * 7, textureSize.x, textureSize.y));
 
 	rb = unique_ptr<Rigidbody>(new Rigidbody());
-	ps = unique_ptr<ParticleSystem>(new ParticleSystem(&player, 50, 5, particle, 50, seconds(1), Color::Black));  // both goes out of scope, !WORKS NOW
+	ps = unique_ptr<ParticleSystem>(new ParticleSystem(&player, 50, 5, 50, seconds(1)));  // both goes out of scope, !WORKS NOW
 	g = unique_ptr<GameObject>(new GameObject(player, *ps.get(), *rb.get())); // but I add gameObject to the scene? and the gameObject has the ref of the particleSystem
 	Renderer.ChangeDrawableLayer(player, 9);
 }
@@ -148,7 +148,7 @@ void PlayerAnimState()
 	player.setTextureRect(_playerAnim.uvRect);
 }
 
-void CollisionChecking() // this should be moved into physics
+void CollisionChecking() 
 {
 	if (window.getSize().x < player.getPosition().x + player.getLocalBounds().width / 2)
 		player.setPosition(window.getSize().x - player.getLocalBounds().width / 2, player.getPosition().y); // checking for window x
@@ -158,12 +158,12 @@ void CollisionChecking() // this should be moved into physics
 
 	if (window.getSize().y < player.getPosition().y + player.getLocalBounds().height / 8) // beware the 8
 		player.setPosition(player.getPosition().x, window.getSize().y - player.getLocalBounds().height / 8); // checking for window y
-	
+
 	if (0 > player.getPosition().y - player.getLocalBounds().height / 2)
 		player.setPosition(player.getPosition().x, 0 + player.getLocalBounds().height / 2);
 }
 
-void Shoot() // make objects with monobehaviour so that objects don't go out of scope, here the drawable and rigidbody ref are added to their management system
+void Shoot() 
 {
 	CircleShape* s = new CircleShape(10, 50);
 	s->setPosition(player.getPosition() + Vector2f(0, 100) + Vector2f(+40, 0) + (Vector2f(70, 0) * player.getScale().x));

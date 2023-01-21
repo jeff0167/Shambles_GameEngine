@@ -29,7 +29,7 @@ namespace Shambles
         void ChangeDrawableLayer(Drawable& _drawable, int layerNr);
 
     protected:
-
+        static Canvas* _canvas;
         Canvas() {};
 
     };

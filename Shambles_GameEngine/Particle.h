@@ -12,9 +12,9 @@ namespace Shambles
 	{
 	public:
 		CircleShape dot;
+		Color* m_Color;
 
 		Particle() {};
-		Particle(float radius, Texture& texture);
 		~Particle();
 
 		void SetVelocity(float x, float y);
@@ -27,7 +27,7 @@ namespace Shambles
 		Vector2f GetVelocity();
 		void SetParticleSystem(ParticleSystem& ps);
 		bool IsDead();
-		Color SetColor(int, float, float, float);
+		Color SetColor(int, float, float, int);
 		Time lifespan, maxLifespan;
 
 	protected:
