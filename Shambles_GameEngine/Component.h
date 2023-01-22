@@ -25,6 +25,11 @@ namespace Shambles
 			return "Im a " + className;
 		}
 
+		~Component()
+		{
+			//ToString();
+		}
+
 	private:
 
 	};

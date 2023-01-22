@@ -137,6 +137,17 @@ namespace Shambles
 				//DebugLog("Calling cool, dynamic");
 				if (Collision(*colliders[i], *colliders[j]))
 				{
+					// hmm wonder if this is something heavy execution when the OnCollision func is empty
+					auto d = colliders[i]->OnCollision;
+					if (d != nullptr)
+					{
+						d(colliders[j]);
+					}
+					d = colliders[j]->OnCollision;
+					if (d != nullptr)
+					{
+						d(colliders[i]);
+					}
 					//DebugLog("Collision");
 				}
 			}
@@ -213,9 +224,9 @@ namespace Shambles
 			if (xi > xj)
 			{
 				// this might need some updates values, or other values, seems to work alright atm
-				second.rigidbody->transform->move(first.rigidbody->velocity * m_Physics.FixedUpdateMovement());
+				//second.rigidbody->transform->move(first.rigidbody->velocity * m_Physics.FixedUpdateMovement());
 			}
-			else first.rigidbody->transform->move(second.rigidbody->velocity * m_Physics.FixedUpdateMovement());
+			//else first.rigidbody->transform->move(second.rigidbody->velocity * m_Physics.FixedUpdateMovement());
 			//DebugLog("bound intersect");
 			return true;
 		}

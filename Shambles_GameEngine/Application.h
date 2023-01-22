@@ -11,14 +11,14 @@ using namespace sf;
 using namespace std;
 using namespace Shambles;  //  precompiled header file: stdafx.h      before pch
 
-int windowHeight = 1200;
-int windowWidth = 1200;
+int windowHeight = 1080; // defualt 1200 x 1200
+int windowWidth = 1920;
 RenderWindow window(VideoMode(windowWidth, windowHeight), "Shambles dragon game", Style::Close | Style::Titlebar | Style::Resize);
 
 float deltaTime = 0;
 Clock _clock;
 
-vector<function<void()>> UpdateFunctions;
+vector<function<void()>> UpdateFunctions; // list's of function pointers
 vector<function<void()>> AwakeFunctions;
 
 namespace Shambles 

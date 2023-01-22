@@ -32,7 +32,7 @@ namespace Shambles
 	//	delete& gameObject; // no idea how deleting is supposed to be done, though should be possible
 	//}
 
-	void Monobehaviour::Invoke(function<void()> function, float callDelay)
+	void Monobehaviour::Invoke(function<void()> function, float callDelay) // maybe specify it to use ms og seconds so you know the time measurement you're using
 	{
 		thread t(DelayedCall, function, callDelay);
 		t.detach();

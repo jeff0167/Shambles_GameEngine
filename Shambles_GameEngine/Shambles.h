@@ -10,6 +10,7 @@
 #include "../Shambles_GameEngine/Particle.cpp"       
 #include "../Shambles_GameEngine/ParticleSystem.cpp"       
 #include "../Shambles_GameEngine/ParticleSystemUpdate.cpp"       
+#include "../Shambles_GameEngine/GameObject.h"       
 #include "../Shambles_GameEngine/GameObject.cpp"       
 #include "../Shambles_GameEngine/SceneWindow.cpp"       
 #include "../Shambles_GameEngine/Scene.cpp"       

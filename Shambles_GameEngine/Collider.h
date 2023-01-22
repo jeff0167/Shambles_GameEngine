@@ -15,6 +15,7 @@ namespace Shambles
         Vector2f offsetPos = Vector2f(0, 0);
         Shape* shape;
         Rigidbody* rigidbody;
+        function<void(Collider* other)> OnCollision;
 
         Collider() {};
 

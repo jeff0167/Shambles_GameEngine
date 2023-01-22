@@ -21,11 +21,11 @@ namespace Shambles
 		}
 
 		int alpha = (lifespan.asSeconds() / (maxLifespan.asSeconds())) * 255;
-		dot.setFillColor(SetColor(Umapi(alpha, 255, 0, 360, 0), 1, 1, alpha));
+		//dot.setFillColor(SetColor(Umapi(alpha, 255, 0, 360, 0), 1, 1, alpha));
 		 
-		//Color c = dot.getFillColor(); // this is slow, like a lot
-		//c.a = alpha;
-		//dot.setFillColor(c); // can't simply set the alpha value
+		Color c = dot.getFillColor(); // this is slow, like a lot
+		c.a = alpha;
+		dot.setFillColor(c); // can't simply set the alpha value
 		if (lifespan.asSeconds() == 0)
 		{
 			lifespan = maxLifespan;

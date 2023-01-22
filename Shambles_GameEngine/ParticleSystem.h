@@ -19,24 +19,6 @@ namespace Shambles
 	public:
 		ParticleSystem() {};
 
-		//static mutex m_Mutex;
-
-		static void InitializeParticle(Particle* particle, Texture* texture, Vector2f pos, float radius, float _speed, Time lifeTime, Color* color) // don't need to lock with mutex here
-		{
-			particle->dot.setTexture(texture);
-			float size = (rand() % 3) * radius;
-			particle->dot.setRadius(size);
-			float angle = (rand() % 360) * 3.14f / 180.f;
-			double speed = (rand() % 50) * 0.01 * _speed + 0.05;
-			particle->SetVelocity(cos(angle) * speed, sin(angle) * speed);
-			particle->SetMaxLifeTime(milliseconds((rand() % 100) * 2.0f + lifeTime.asMilliseconds()));
-			particle->lifespan = particle->maxLifespan;
-			particle->SetPosition(pos);
-			particle->m_Color = color;
-			particle->dot.setFillColor(*particle->m_Color);
-			//lock_guard<mutex> lock(m_Mutex); // Get lower performance if used and isn't needed to make it work it seems
-		}
-
 		vector<future<void>> m_Futures;
 		ParticleSystem(Transformable* targetTransform, unsigned int particleCount, float radius, float _speed, Time lifeTime, Color color = Color::White) :
 			m_TargetTransform(targetTransform),
@@ -45,8 +27,6 @@ namespace Shambles
 			m_Radius(radius),
 			m_LifeTime(lifeTime)
 		{
-			//auto d = Mono.Timer();
-
 			static Texture t;
 			if (t.loadFromFile("ParticleDefault.png"))
 			{
@@ -61,24 +41,13 @@ namespace Shambles
 			}
 		}
 
-		void SetEmitterTransform(Transformable& transform) override
-		{
-			m_TargetTransform = &transform;
-		}
-		Vector2f GetTargetTransform()
-		{
-			if (m_TargetTransform != nullptr) return m_TargetTransform->getPosition();
-			return Vector2f(0, 0);
-		}
+		static void InitializeParticle(Particle* particle, Texture* texture, Vector2f pos, float radius, float _speed, Time lifeTime, Color* color);
 
-		void Update() override
-		{
-			for (auto& particle : m_particles)
-			{
-				//async(launch::async, [&particle](){return particle.Update();}); // using async without static func, though not suited for this specifi case
-				particle.Update();
-			}
-		}
+		void SetEmitterTransform(Transformable& transform) override;
+		void SetTexture(Texture* texture);
+		Vector2f GetTargetTransform();
+
+		void Update() override;
 
 	protected:
 		vector<Particle> m_particles;

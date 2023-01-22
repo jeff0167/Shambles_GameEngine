@@ -128,7 +128,7 @@ namespace Shambles
 	template<class T>
 	inline T* GameObject::GetComponent(T type)
 	{
-		for (auto component : components)
+		for (auto& component : components)
 		{
 			if (typeid(*component).name() == typeid(type).name()) // *this->components[i]).name(), remember the * in front!!
 			{
@@ -139,7 +139,7 @@ namespace Shambles
 		string typeName = typeid(type).name();
 		if (!typeName.find("Collider")) return nullptr;
 
-		for (auto component : components) // is this even necessarcy!? ok say you just want a collider, not a specifik one, then you would do this, yes
+		for (auto& component : components) // is this even necessarcy!? ok say you just want a collider, not a specifik one, then you would do this, yes
 		{
 			string s = typeid(*component).name();
 			if (s.find("Collider") != string::npos)	return &dynamic_cast<T&>(*component);
@@ -154,7 +154,7 @@ namespace Shambles
 
 	GameObject::~GameObject()
 	{
-		for (auto component : components)
+		for (auto& component : components)
 		{
 			RemoveComponent(*component);
 		}

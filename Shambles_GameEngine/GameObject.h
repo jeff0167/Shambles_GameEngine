@@ -23,6 +23,7 @@ namespace Shambles
 		GameObject(Shape& drawShape, const vector<Component*>& _components);
 
 		bool IsActive;
+		string Tag;
 		// need a tagging system(Enum?) and perhaps a layer system so you wont have to do layers purely by numbers
 		Transformable* transform; // suppose you could even use this as an id, would really just want to use the memory adress of the gameobject as an identifier, but no, that is terrible hard
 		vector<Component*> components;
@@ -32,7 +33,6 @@ namespace Shambles
 		void RemoveComponent(Component& component);
 		const vector<Component*>& GetComponents();
 
-		// can I move this to cpp now?
 		template <class T> 
 		T* GetComponent(T type); // to be even better is should only allow classes that inherits from component
 

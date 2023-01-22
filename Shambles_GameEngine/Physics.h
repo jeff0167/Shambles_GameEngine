@@ -40,6 +40,11 @@ namespace Shambles
 		const double m_DeltaSpeed = 10.0;
 		float m_PhysicsDeltaTime;
 
+		void SetGravity(Vector2f value)
+		{
+			gravity = value;
+		}
+
 		Int32 GetDeltaTimeMili()
 		{
 			return m_Time.asMilliseconds();

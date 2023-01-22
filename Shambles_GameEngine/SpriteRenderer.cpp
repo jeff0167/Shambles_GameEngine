@@ -26,8 +26,8 @@ namespace Shambles
 	SpriteRenderer::SpriteRenderer(Texture& image, Vector2f imageSize, Vector2f imagePos, int layerNr) :
 		m_layerNr(layerNr)
 	{
-		m_Texture = &image;
-		setTexture(m_Texture);
+		//m_Texture = image;
+		setTexture(&image);
 		setSize(imageSize);
 		setOrigin(imageSize.x / 2, imageSize.y / 2);
 		setPosition(imagePos);

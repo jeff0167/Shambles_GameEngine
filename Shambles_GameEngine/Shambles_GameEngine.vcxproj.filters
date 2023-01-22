@@ -154,9 +154,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\GameObject Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rigidbody.cpp">
-      <Filter>Source Files\GameObject Files</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Source Files\GameObject Files</Filter>
     </ClCompile>
@@ -174,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="ParticleSystemUpdate.cpp">
       <Filter>Source Files\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Source Files\GameObject Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

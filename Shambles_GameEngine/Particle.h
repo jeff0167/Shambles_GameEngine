@@ -11,7 +11,7 @@ namespace Shambles
 	class Particle
 	{
 	public:
-		CircleShape dot;
+		RectangleShape dot;
 		Color* m_Color;
 
 		Particle() {};
