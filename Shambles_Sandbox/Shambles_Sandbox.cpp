@@ -125,7 +125,7 @@ void MakeStones()
 	Science.SetGravity(Vector2f(0, 1.5f)); // lowering gravity
 	stoneTexture.loadFromFile("Stone.jpg");
 
-	for (size_t i = 0; i < 25; i++) // boxcollider gets destroyed double the amount of all the ohter components
+	for (size_t i = 0; i < 25; i++) // boxcollider gets destroyed double the amount of all the ohter components, defualt 25 stones made, max 150 before frame rate goes under 120
 	{
 		Rigidbody* rb = new Rigidbody();
 		SpriteRenderer* sprite = new SpriteRenderer(stoneTexture, Vector2f(50, 50), Vector2f(0, 2000));

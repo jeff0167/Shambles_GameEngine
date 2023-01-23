@@ -17,9 +17,11 @@
 mono_crash.*
 
 # Build results
-[Dd]ebug/
+Shambles_GameEngine/x64/[Dd]ebug/
+Shambles_GameEngine/x64/[Rr]elease/
+Shambles_Sandbox/x64/[Dd]ebug/
+Shambles_Sandbox/x64/[Rr]elease/
 [Dd]ebugPublic/
-[Rr]elease/
 [Rr]eleases/
 x86/
 [Ww][Ii][Nn]32/
